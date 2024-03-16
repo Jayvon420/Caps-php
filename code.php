@@ -2,6 +2,40 @@
 session_start();
 require 'dbcon.php';
 
+
+
+// Update product code ==========================================================>
+
+if(isset($_POST['updateProduct']))
+{
+    $product_id = mysqli_real_escape_string($con, $_POST['product_id']);
+    
+    $name = mysqli_real_escape_string($con, $_POST['name']);
+    $quantity = mysqli_real_escape_string($con, $_POST['quantity']);
+
+    $query = "UPDATE products SET name= '$name', quantity='$quantity' 
+                WHERE id='$product_id'";
+    $query_run = mysqli_query($con, $query);
+
+    if($query_run)
+    {
+        $_SESSION['message'] = "Product Updated Successfuly";
+        header("Location: addProduct.php");
+        exit(0);
+    }
+    else
+    {
+        $_SESSION['error'] = "Error updating";
+        header("Location: addProduct.php");
+        exit(0);
+
+    }
+
+
+}
+
+// Update product end  ==========================================================>
+
 // adding product code ==========================================================>
 if(isset($_POST['add_product'])){
 
@@ -43,12 +77,6 @@ if(isset($_POST['add_product'])){
 
 
 
-// Update product code ==========================================================>
-
-
-
-
-// Update product end  ==========================================================>
 
 
 

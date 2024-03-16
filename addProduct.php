@@ -1,25 +1,15 @@
-<?php
-require 'dbcon.php';
-session_start();
-?>
+<?php include("includes/header.php")?>
+<?php include("includes/navBar.php")?>
+<?php include("includes/sideNav.php")?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inventory Management System</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body class="container-fluid ">
+
     <div class="px-4">
         <h1 class="my-5">Inventory System</h1>
         <!-- Add Product Form -->
         
     <form action="code.php" method="POST">
-        <?php include('fail.php'); ?>
-        <?php include('message.php'); ?>
+        <?php include('alerts/fail.php'); ?>
+        <?php include('alerts/message.php'); ?>
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
@@ -40,9 +30,10 @@ session_start();
     </form>
         <!-- Display Products -->
         <h2>Product List</h2>
-        <table class="table table-striped table-bordered">
-            <thead class>
+        <table class="table table-striped table-bordered" id="myTable">
+            <thead>
                 <tr>
+                    <th>ID</th>
                     <th>Product Name</th>
                     <th>Quantity</th>
                     <th class="text-center">Action</th>
@@ -60,12 +51,13 @@ session_start();
                             // echo $product['name'];
                             ?>
                             <tr>
+                                <td><?= $product['id']?></td>
                                 <td><?= $product['name'] ?></td>
                                 <td><?= $product['quantity'] ?></td>
                                 <td class="text-center">
-                                    <a class="p-1 text-success" href="##">Update</a> 
-                                    <a class="p-1 text-danger" href="##">Delete</a>
-                                </td>
+                                    <a class="btn btn-success btn-sm " href="updateProduct.php?id=<?= $product['id']?>">Update</a> 
+                                    <a class="btn btn-danger btn-sm " href="##">Delete</a>
+                                 </td>
                             </tr>
                             <?php
                         }
@@ -78,9 +70,6 @@ session_start();
             </tbody>
         </table>
     </div>
-    <!-- Bootstrap JS (optional) -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
+ 
+
+<?php include("includes/footer.php")?>
